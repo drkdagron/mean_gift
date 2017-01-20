@@ -1,5 +1,6 @@
 var mongoose = require('mongoose'),
-    User = mongoose.model('User');
+    User = mongoose.model('User'),
+    Events = mongoose.model('Event');
 
 exports.create = function(req, res, next) {
 
@@ -70,12 +71,16 @@ exports.login = function(req, res, next)
         }
         else if (data.length > 0)
         {
-            
-            res.json({
+            Events.find({members: data[0]._id}, function(err, foundEvents) {
+                res.json({
                 status:"Success",
                 message:"Successful login",
-                data: data
+                data: data,
+                events: foundEvents
+                });
+                
             });
+            
         }
         else 
         {

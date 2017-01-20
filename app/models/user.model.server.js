@@ -1,4 +1,5 @@
 var mongoose = require('mongoose'),
+    Events = require('./event.model.server.js'),
     Schema = mongoose.Schema;
 
 var UserSchema = new Schema({
