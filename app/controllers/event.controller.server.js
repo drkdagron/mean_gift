@@ -105,7 +105,7 @@ exports.join = function(req, res, next)
 exports.view = function(req, res, next)
 {
     console.log("viewing event");
-    Events.findOne({_id: req.body.id}).populate('owner').exec( function(err, event)
+    Events.findOne({_id: req.body.id}).populate('owner').populate('items').exec( function(err, event)
     {
         if (err)
         {
@@ -134,7 +134,12 @@ exports.getEvents = function(req, res, next)
     Events.find({members: req.body.userID}, function(err, data) {
         if (err)
         {
-            
+            res.status(400);
+            res.json({
+                status:"Error",
+                message:"System Error",
+                data: err
+            })
         }
 
         res.status(200);
