@@ -2,7 +2,7 @@ var restify = require('restify');
 var server = restify.createServer();
 
 var mongoose = require('mongoose');
-var db = mongoose.connect('mongodb://localhost/mygiftapp');
+var db = mongoose.connect('mongodb://' + 'user' + ':' + 'd3fau1t_us3r' + '@ds139619.mlab.com:39619/gifttrackandroid');
 require('./app/models/comment.model.server.js');
 require('./app/models/event.model.server.js');
 require('./app/models/user.model.server.js');
