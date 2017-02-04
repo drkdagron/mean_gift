@@ -71,3 +71,24 @@ exports.Create = function(req, res, next)
         }
     })});
 }
+
+exports.Edit = function(req, res, next)
+{
+    console.log(req.body);
+
+    Items.findOneAndUpdate({_id:req.body.ID}, {$set:{comment:req.body.comm}}, {new:true}, function(err, item) {
+        console.log(item);
+
+        res.status(200);
+        res.json({
+            status:"Success",
+            message:"Comment Modified",
+            data: req.body.comm
+        })
+    });
+}
+
+exports.Delete = function(req, res, next)
+{
+
+}

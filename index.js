@@ -25,6 +25,8 @@ server.post("/event/delete", evtCtrl.delete);
 
 server.get("/event/comment/get/:eventId", comCtrl.GetComments);
 server.post("/event/comment/create", comCtrl.Create);
+server.put("/event/comment/edit", comCtrl.Edit);
+server.del("/event/comment/delete", comCtrl.Delete);
 
 var port = process.env.PORT || 3000;
 server.listen(port, function(err) {
