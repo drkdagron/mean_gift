@@ -76,19 +76,59 @@ exports.Edit = function(req, res, next)
 {
     console.log(req.body);
 
-    Items.findOneAndUpdate({_id:req.body.ID}, {$set:{comment:req.body.comm}}, {new:true}, function(err, item) {
+    Items.findOneAndUpdate({_id:req.body.ID}, {$set:{comment:req.body.comment}}, {new:true}, function(err, item) {
+        if (err)
+        {
+            res.status(400);
+            res.json({
+                status:"Error",
+                message:"System Error",
+                data: err
+            })
+        }
+
         console.log(item);
 
         res.status(200);
         res.json({
             status:"Success",
             message:"Comment Modified",
-            data: req.body.comm
+            data: req.body.comment
         })
     });
 }
 
 exports.Delete = function(req, res, next)
 {
+    Items.findOneAndRemove({_id:req.body.ID}, function(err, item) {
+        if (err)
+        {
+            res.status(400);
+            res.json({
+                status:"Error",
+                message:"System Error",
+                data: err
+            })
+        }
 
+        console.log(item);
+        if (item != null)
+        {
+            res.status(200);
+            res.json({
+                status:"Success",
+                message:"Comment Modified",
+                data: req.body.comm
+            })
+        }
+        else
+        {
+            res.status(400);
+            res.json({
+                status:"Error",
+                message:"Item not found",
+                data:null
+            })
+        }
+    });
 }
