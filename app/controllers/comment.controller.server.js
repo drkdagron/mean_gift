@@ -28,6 +28,7 @@ exports.Create = function(req, res, next)
     item.owner = req.body.OwnerId;
     item.ownername = req.body.OwnerName;
     item.comment = req.body.Comment;
+    item.gotten = false;
 
     item.save(function(err, itemSave) {
 
@@ -76,7 +77,7 @@ exports.Edit = function(req, res, next)
 {
     console.log(req.body);
 
-    Items.findOneAndUpdate({_id:req.body.ID}, {$set:{comment:req.body.comment}}, {new:true}, function(err, item) {
+    Items.findOneAndUpdate({_id:req.body.ID}, {$set:{comment:req.body.comment, gotten: req.body.gotten}}, {new:true}, function(err, item) {
         if (err)
         {
             res.status(400);
